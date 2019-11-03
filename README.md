@@ -1,14 +1,8 @@
 # A practical approach to Java Memory Model 
 # Presentation
-  https://www.youtube.com/watch?v=pS5dPQwgnYo
-  
-  https://speakerdeck.com/amczarny/a-practical-approach-to-java-memory-model
+ * https://www.youtube.com/watch?v=pS5dPQwgnYo
 # Build
 ```
 $ mvn clean install
-
-# Execute 
-$ java -jar target/jcstress.jar -v -t [testName]
 $ java -jar target/jcstress.jar -v -t AmISynchronized
 ```
-For more information please reffer to https://www.happens-before.blogspot.com
