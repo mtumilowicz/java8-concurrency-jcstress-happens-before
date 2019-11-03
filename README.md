@@ -9,5 +9,6 @@ $ mvn clean install
 
 # Execute 
 $ java -jar target/jcstress.jar -v -t [testName]
+$ java -jar target/jcstress.jar -v -t AmISynchronized
 ```
 For more information please reffer to https://www.happens-before.blogspot.com
