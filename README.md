@@ -5,13 +5,6 @@
 * https://github.com/amczarny/JMMPresentation
 * https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601
 
-## project
-```
-$ mvn clean install
-$ java -jar target/jcstress.jar -v -t HappensBeforeExample
-```
-* reports in readable form: `results/jcstress.HappensBeforeExample`
-
 ## jcstress
 * The Java Concurrency Stress tests (jcstress) is an experimental harness and a suite of tests to aid the research 
 in the correctness of concurrency support in the JVM, class libraries, and hardware
@@ -122,3 +115,38 @@ each update operation can be performed as a single atomic update
 * Java operators like `++` and `+=` are not atomic
 * why an `Object` member variable can't be both `final` and `volatile` in Java?
     * JMM promises that after `ctor` is finished any thread will see the same (correct) value of final field
+
+## project
+```
+$ mvn clean install
+$ java -jar target/jcstress.jar -v -t HappensBeforeExample
+```
+* reports in readable form: `results/jcstress.HappensBeforeExample`
+
+### overview
+```
+@JCStressTest
+@Outcome(id = "1", expect = Expect.ACCEPTABLE, desc = "Actor2 is executed before Actor1")
+@Outcome(id = "2", expect = Expect.ACCEPTABLE, desc = "Actor2 is executed after y = 2 and before x = 3 in Actor1")
+@Outcome(id = "3", expect = Expect.FORBIDDEN, desc = "y = 2 can not be reordered with x = 3 as we have volatile on x")
+@Outcome(id = "6", expect = Expect.ACCEPTABLE, desc = "Actor2 executed after Actor1")
+@State
+public class HappensBeforeExample {
+   int y = 1;
+   volatile int x = 1;
+
+   @Actor
+   void actor1() {
+      y = 2;
+      x = 3;
+   }
+
+   @Actor
+   void actor2(I_Result r) {
+      r.r1 = y * x; // wrong in this line!
+   }
+}
+```
+* there are some outcomes with 3, why?
+    * in java, expressions are evaluated from left to right, so the last line: `r.r1 = y * x` should be reversed:
+    `r.r1 = x * y` to guarantee happens-before
