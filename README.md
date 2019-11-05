@@ -60,6 +60,8 @@ in the correctness of concurrency support in the JVM, class libraries, and hardw
     * marks the result object
     * jcstress ships lots of pre-canned result classes - see `org.openjdk.jcstress.infra.results` package
     * one of many implementations: `I_Result` (one `int` holder)
+### results
+![alt text](img/jcstress-report.png)
 
 ## happens-before
 * in computer science, the happened-before relation is a relation between the result of two events, 
@@ -104,19 +106,19 @@ events are in reality executed out of order (usually to optimize program flow)
       of actions between them — there is no happens-before relation
   
 ## volatile
-* Java Memory Model ensures that all threads see a consistent value for the variable
-* every read of a volatile variable will be read from the computer's main memory, and not from the CPU cache
-* every write to a volatile variable will be written to main memory, and not just to the CPU cache
+* Java Memory Model ensures that all threads see a consistent value of the variable
+* every read of a `volatile` variable will be read from the computer's main memory, and not from the CPU cache
+* every write to a `volatile` variable will be written to main memory, and not just to the CPU cache
 * prevents compiler / CPU code reordering
-* when we write to a volatile variable, it creates a **happens-before** relationship with each subsequent 
+* when we write to a `volatile` variable, it creates a **happens-before** relationship with each subsequent 
 read of that same variable 
-    * so any memory writes that have been done until that volatile variable write, will subsequently 
-    be visible to any statements that follow the read of that volatile variable
-* characterizing the situations under which volatile can be used safely involves determining whether 
-each update operation can be performed as a single atomic update.
+    * so any memory writes that have been done until that `volatile` variable write, will subsequently 
+    be visible to any statements that follow the read of that `volatile` variable
+* characterizing the situations under which `volatile` can be used safely involves determining whether 
+each update operation can be performed as a single atomic update
 
 ### remarks
-* updates to non-volatile long or a double may not be atomic, and
-* Java operators like ++ and += are not atomic.
-* why an Object member variable can't be both final and volatile in Java?
+* updates to non-volatile long or a double may not be atomic
+* Java operators like `++` and `+=` are not atomic
+* why an `Object` member variable can't be both `final` and `volatile` in Java?
     * JMM promises that after `ctor` is finished any thread will see the same (correct) value of final field
