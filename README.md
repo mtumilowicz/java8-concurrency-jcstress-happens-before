@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/mtumilowicz/java8-concurrency-jcstress-happens-before.svg?branch=master)](https://travis-ci.com/mtumilowicz/java8-concurrency-jcstress-happens-before)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # java12-concurrency-jcstress-happens-before
 
