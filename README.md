@@ -12,6 +12,26 @@ $ java -jar target/jcstress.jar -v -t HappensBeforeExample
 ```
 * reports in readable form: `results/jcstress.HappensBeforeExample`
 
+## jcstress
+* The Java Concurrency Stress tests (jcstress) is an experimental harness and a suite of tests to aid the research 
+in the correctness of concurrency support in the JVM, class libraries, and hardware
+* most of the tests are probabilistic, and require substantial time to catch all the cases
+    * it is highly recommended to run tests longer to get reliable results
+* most of the tests require at least 2 online CPUs
+    * low CPU count machines could also use these tests, but harness will force yielding there
+* samples: http://hg.openjdk.java.net/code-tools/jcstress/file/tip/jcstress-samples/src/main/java/org/openjdk/jcstress/samples
+    * **APISample_** describe the API, 
+    * **JMMSample_** describe the basics of Java Memory Model, 
+    * **ConcurrencySample_** show the interesting concurrent behaviors of standard library
+* API: http://hg.openjdk.java.net/code-tools/jcstress/file/tip/jcstress-core/src/main/java/org/openjdk/jcstress/annotations/
+
+### overview
+* @JCStressTest
+* @Outcome
+* @State
+* @Actor
+* I_Result
+
 ## happens-before
 * in computer science, the happened-before relation is a relation between the result of two events, 
 such that if one event should happen before another event, the result must reflect that, even if those 
