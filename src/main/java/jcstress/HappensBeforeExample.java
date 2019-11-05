@@ -32,19 +32,17 @@ import org.openjdk.jcstress.infra.results.I_Result;
 @Outcome(id = "6", expect = Expect.ACCEPTABLE, desc = "Actor2 executed after Actor1")
 @State
 public class HappensBeforeExample {
-   int y = 1;
-   volatile int x = 1;
+    int y = 1;
+    volatile int x = 1;
 
-   @Actor
-   void actor1() {
-      y = 2;
-      x = 3;
-   }
+    @Actor
+    void actor1() {
+        y = 2;
+        x = 3;
+    }
 
-   @Actor
-   void actor2(I_Result r) {
-      r.r1 = y * x;
-   }
+    @Actor
+    void actor2(I_Result r) {
+        r.r1 = y * x;
+    }
 }
-
-
