@@ -31,7 +31,7 @@ in the correctness of concurrency support in the JVM, class libraries, and hardw
     * `@Outcome(id = "1", expect = Expect.ACCEPTABLE, desc = "Actor2 is executed before Actor1")`
     * describes the test outcome, and how to deal with it
     * usually has multiple outcomes, each with its distinct `id`
-    * `id` is cross-matched with `Result`-class' `toString()` value
+    * `id` is cross-matched with `@Result`-class' `toString()` value
         * allows regular expressions
     * there can be a default outcome, which captures any non-captured result (default `id`)
     * fields
@@ -46,38 +46,20 @@ in the correctness of concurrency support in the JVM, class libraries, and hardw
                 `FORBIDDEN` - should never be present
         * `String desc() default ""` - human-readable description for a given result
 * `@State`
-     * {@link State} is the central annotation for handling test state.
-     * It annotates the class that holds the data mutated/read by the tests.
-     
-      * <p>Important properties for the class are:
-      * <ol>
-      *     <li>State class should be public, non-inner class.</li>
-      *     <li>State class should have a default constructor.</li>
-      * </ol>
-      
-       * <p>During the run, many {@link State} instances are created, and therefore
-       * the tests should try to minimize state instance footprint.
+     * annotates the class that holds the data mutated/read by the tests
+     * class should be public, non-inner class
+     * class should have a default constructor
+     * tests should try to minimize state instance footprint (during the run, many `@State` instances are created)
 * `@Actor`
-     * {@link Actor} is the central test annotation. It marks the methods that hold the
-     * actions done by the threads. The invariants that are maintained by the infrastructure
-     * are as follows:
-     *
-     * <ol>
-     *     <li>Each method is called only by one particular thread.</li>
-     *     <li>Each method is called exactly once per {@link State} instance.</li>
-     * </ol>
-     *
-     
-     * <p>Note that the invocation order against other {@link Actor} methods is deliberately
-      * not specified.
-      
-       * <p>Actor-annotated methods can have only the {@link State} or {@link Result}-annotated
-       * classes as the parameters.
+     * marks the methods that hold the actions done by the threads
+     * each method is called only by one particular thread
+     * each method is called exactly once per `@State` instance
+     * invocation order against other `@Actor` methods is deliberately not specified
+     * `@Actor`-annotated methods can have only the `@State` or `@Result`-annotated classes as the parameters
 * `@Result`
-    *  * {@link Result} annotation marks the result object. This annotation is seldom
-       * useful for user code, because jcstress ships lots of pre-canned result classes,
-       * see {@link org.openjdk.jcstress.infra.results} package.
-    * one of many implementations: `I_Result` (one int holder)
+    * marks the result object
+    * jcstress ships lots of pre-canned result classes - see `org.openjdk.jcstress.infra.results` package
+    * one of many implementations: `I_Result` (one `int` holder)
 
 ## happens-before
 * in computer science, the happened-before relation is a relation between the result of two events, 
