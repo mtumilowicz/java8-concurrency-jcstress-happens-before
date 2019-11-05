@@ -26,48 +26,25 @@ in the correctness of concurrency support in the JVM, class libraries, and hardw
 * API: http://hg.openjdk.java.net/code-tools/jcstress/file/tip/jcstress-core/src/main/java/org/openjdk/jcstress/annotations/
 
 ### overview
-* `@JCStressTest`
-    * marks the class that should be as the concurrency stress test
-    * @Actor annotations are used to describe test behavior
-    * @State and @Result annotations are used to describe the test state and results
+* `@JCStressTest` - marks the class that should be as the concurrency stress test
 * `@Outcome`
-    *  * {@link Outcome} describes the test outcome, and how to deal with it.
-       * It is usually the case that a {@link JCStressTest} has multiple outcomes,
-       * each with its distinct {@link #id()}.
-    *  * <p>{@link #id()} is cross-matched with {@link Result}-class' {@link #toString()}
-       * value. {@link #id()} allows regular expressions.
-    *  * <p>There can be a default outcome, which captures any non-captured result.
-       * It is the one with the default {@link #id()}
+    * `@Outcome(id = "1", expect = Expect.ACCEPTABLE, desc = "Actor2 is executed before Actor1")`
+    * describes the test outcome, and how to deal with it
+    * usually has multiple outcomes, each with its distinct `id`
+    * `id` is cross-matched with `Result`-class' `toString()` value
+        * allows regular expressions
+    * there can be a default outcome, which captures any non-captured result (default `id`)
     * fields
-         * @return Observed result. Empty string or no parameter if the case is default.
-         * Supports regular expressions.
-         */
-        String[] id() default { "" };
-    
-        /**
-         * @return Expectation for the observed result.
-         * @see Expect
-         */
-        Expect expect();
-                /**
-                 * Acceptable result. Acceptable results are not required to be present.
-                 */
-                ACCEPTABLE,
-            
-                /**
-                 * Same as {@link #ACCEPTABLE}, but this result will be highlighted in reports.
-                 */
-                ACCEPTABLE_INTERESTING,
-            
-                /**
-                 * Forbidden result. Should never be present.
-                 */
-                FORBIDDEN,
-    
-        /**
-         * @return Human-readable description for a given result.
-         */
-        String desc() default "";
+        * `String[] id() default { "" }`
+            * observed result
+            * supports regular expressions
+        * `Expect expect()`
+            * expectation for the observed result
+            * values
+                `ACCEPTABLE` - are not required to be present
+                `ACCEPTABLE_INTERESTING` - same as `ACCEPTABLE`, but this result will be highlighted in reports
+                `FORBIDDEN` - should never be present
+        * `String desc() default ""` - human-readable description for a given result
 * `@State`
      * {@link State} is the central annotation for handling test state.
      * It annotates the class that holds the data mutated/read by the tests.
