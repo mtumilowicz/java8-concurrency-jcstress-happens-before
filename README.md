@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java8-concurrency-jcstress-happens-before.svg?branch=master)](https://travis-ci.com/mtumilowicz/java8-concurrency-jcstress-happens-before)
+
 # java12-concurrency-jcstress-happens-before
 
 ## reference
