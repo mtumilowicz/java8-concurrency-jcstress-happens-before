@@ -4,7 +4,7 @@
 # java12-concurrency-jcstress-happens-before
 
 ## reference
-* https://www.youtube.com/watch?v=pS5dPQwgnYo
+* [A practical approach to Java Memory Model with Andrzej Czarny](https://www.youtube.com/watch?v=pS5dPQwgnYo)
 * https://github.com/amczarny/JMMPresentation
 * https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601
 
@@ -124,6 +124,7 @@ each update operation can be performed as a single atomic update
 $ mvn clean install
 $ java -jar target/jcstress.jar -v -t HappensBeforeExample
 ```
+* we could use intellij's maven command line and running `java -jar target/jcstress.jar -v -t HappensBeforeExample`
 * reports in readable form: `results/jcstress.HappensBeforeExample`
 
 ### overview
