@@ -105,6 +105,7 @@ events are in reality executed out of order (usually to optimize program flow)
 * Java Memory Model ensures that all threads see a consistent value of the variable
 * every read of a `volatile` variable will be read from the computer's main memory, and not from the CPU cache
 * every write to a `volatile` variable will be written to main memory, and not just to the CPU cache
+   * note that there is no possibility to write directly to the main memory bypassing write to CPU cache
 * prevents compiler / CPU code reordering
 * when we write to a `volatile` variable, it creates a **happens-before** relationship with each subsequent 
 read of that same variable 
